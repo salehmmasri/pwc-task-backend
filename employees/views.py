@@ -19,12 +19,19 @@ class DepartmentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
 
-class EmployeesListView(generics.ListCreateAPIView):
+class EmployeesListAllView(generics.ListCreateAPIView):
     queryset= Employee.objects.all().order_by('-id')
+    serializer_class = EmployeeSerializer
+
+
+class EmployeesListView(generics.ListCreateAPIView):
+    queryset= Employee.objects.all().select_related("department")
+    queryset=queryset.order_by("-id")
     serializer_class = EmployeeSerializer
     filter_backends= [filters.DjangoFilterBackend]
     filterset_class =  EmployeesFilter
     pagination_class = Page
+
 
 
 class EmployeesDetailView(generics.RetrieveUpdateDestroyAPIView):
