@@ -7,4 +7,4 @@ release:
         - mkdir -p static
         - python manage.py collectstatic --noinput
 run:
-    web: gunicorn stop_and_shop_back.wsgi
+    web: gunicorn company.wsgi
