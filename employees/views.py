@@ -20,7 +20,7 @@ class DepartmentDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = DepartmentSerializer
 
 class EmployeesListView(generics.ListCreateAPIView):
-    queryset= Employee.objects.all()
+    queryset= Employee.objects.all().order_by('-id')
     serializer_class = EmployeeSerializer
     filter_backends= [filters.DjangoFilterBackend]
     filterset_class =  EmployeesFilter
